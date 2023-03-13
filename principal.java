@@ -23,79 +23,72 @@ public static void main(String[] args) {
             int option = scanner.nextInt();
             scanner.nextLine();
         
-            switch (option) {
-                case 1:
-                    System.out.println("Ingrese el nombre de la carta:");
-                    String nombreCarta = scanner.nextLine().trim();
-                    mapaCarta.agregarCarta(nombreCarta, mapaCarta.getCartas().get(nombreCarta));
-                    break;
-                case 2:
-                    System.out.println("Ingrese el nombre de la carta:");
-                    String carta = scanner.nextLine().trim();
-                    String tipoCarta = mapaCarta.getTipo(carta);
-                    if (tipoCarta != null) {
-                        System.out.println("Tipo: " + tipoCarta);
-                    } else {
-                        System.out.println("Error: " + carta + " no esta.");
+            if(option == 1){
+                System.out.println("Ingrese el nombre de la carta:");
+                String nombreCarta = scanner.nextLine().trim();
+                mapaCarta.agregarCarta(nombreCarta, mapaCarta.getCartas().get(nombreCarta));
+            }
+            if(option == 2){
+                System.out.println("Ingrese el nombre de la carta:");
+                String carta = scanner.nextLine().trim();
+                String tipoCarta = mapaCarta.getTipo(carta);
+                if (tipoCarta != null) {
+                    System.out.println("Tipo: " + tipoCarta);
+                } else {
+                    System.out.println("Error: " + carta + " no esta.");
+                }
+            }
+            if (option == 3){
+                Map<String, Integer> usuarioCartas = mapaCarta.getUsuarioCartas();
+                if (usuarioCartas.isEmpty()) {
+                    System.out.println("Esta vacio.");
+                } else {
+                    System.out.println("Su coleccion:");
+                    for (Map.Entry<String, Integer> entry : usuarioCartas.entrySet()) {
+                        String nombreCartaEntrada = entry.getKey();
+                        int cuentaCartaEntrada = entry.getValue();
+                        System.out.println(nombreCartaEntrada + " " + cuentaCartaEntrada + " ");
                     }
-                    break;
-                case 3:
-                    Map<String, Integer> usuarioCartas = mapaCarta.getUsuarioCartas();
-                    if (usuarioCartas.isEmpty()) {
-                        System.out.println("Esta vacio.");
-                    } else {
-                        System.out.println("Su coleccion:");
-                        for (Map.Entry<String, Integer> entry : usuarioCartas.entrySet()) {
-                            String nombreCartaEntrada = entry.getKey();
-                            int cuentaCartaEntrada = entry.getValue();
-                            System.out.println(nombreCartaEntrada + " (" + cuentaCartaEntrada + ")");
-                        }
+                }
+            }
+            if (option == 4){
+                Map<String, Integer> usuarioCartasTipo = mapaCarta.getUsuarioCartasTipo();
+                if (usuarioCartasTipo.isEmpty()) {
+                    System.out.println("Esta Vacio.");
+                } else {
+                    System.out.println("Su colleccion:");
+                    for (Map.Entry<String, Integer> entrada : usuarioCartasTipo.entrySet()) {
+                        String tipoEntrada = entrada.getKey();
+                        int cuentaEntrada = entrada.getValue();
+                        System.out.println(tipoEntrada + " " + cuentaEntrada + " ");
                     }
-                    break;
-                case 4:
-                    Map<String, Integer> usuarioCartasTipo = mapaCarta.getUsuarioCartasTipo();
-                    if (usuarioCartasTipo.isEmpty()) {
-                        System.out.println("Esta Vacio.");
-                    } else {
-                        System.out.println("Su colleccion:");
-                        for (Map.Entry<String, Integer> entry : usuarioCartasTipo.entrySet()) {
-                            String cardTypeEntry = entry.getKey();
-                            int cardCountEntry = entry.getValue();
-                            System.out.println(cardTypeEntry + " (" + cardCountEntry + ")");
-                        }
+                }
+            }
+            if (option == 5){
+                Map<String, String> allCards = mapaCarta.getCartas();
+                if (allCards.isEmpty()) {
+                    System.out.println("No hay cartas disponibles.");
+                } else {
+                    System.out.println("Cartas disponibles");
+                    for (Map.Entry<String, String> entrada : allCards.entrySet()) {
+                        String nombreEntrada = entrada.getKey();
+                        String tipoEntrada = entrada.getValue();
+                        System.out.println(nombreEntrada + " " + tipoEntrada + " ");
                     }
-                    break;
-                case 5:
-                    Map<String, String> allCards = mapaCarta.getCartas();
-                    if (allCards.isEmpty()) {
-                        System.out.println("No Cards Available.");
-                    } else {
-                        System.out.println("All Available Cards:");
-                        for (Map.Entry<String, String> entry : allCards.entrySet()) {
-                            String cardNameEntry = entry.getKey();
-                            String cardTypeEntry = entry.getValue();
-                            System.out.println(cardNameEntry + " (" + cardTypeEntry + ")");
-                        }
+                }
+            }
+            if (option == 6){
+                Map<String, String> allCardsByType = mapaCarta.getTCartasTipo();
+                if (allCardsByType.isEmpty()) {
+                    System.out.println("No hay cartas disponibles.");
+                } else {
+                    System.out.println("Cartas Disponibles:");
+                    for (Map.Entry<String, String> entrada : allCardsByType.entrySet()) {
+                        String tipoEntrada = entrada.getKey();
+                        String nombreEntrada = entrada.getValue();
+                        System.out.println(tipoEntrada + ": " + nombreEntrada);
                     }
-                    break;
-                case 6:
-                    Map<String, String> allCardsByType = mapaCarta.getTCartasTipo();
-                    if (allCardsByType.isEmpty()) {
-                        System.out.println("No Cards Available.");
-                    } else {
-                        System.out.println("All Available Cards:");
-                        for (Map.Entry<String, String> entry : allCardsByType.entrySet()) {
-                            String cardTypeEntry = entry.getKey();
-                            String cardNamesEntry = entry.getValue();
-                            System.out.println(cardTypeEntry + ": " + cardNamesEntry);
-                        }
-                    }
-                    break;
-                case 0:
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid Option.");
-                    break;
+                }
             }
         }
     }
@@ -126,4 +119,5 @@ public static void main(String[] args) {
     }
 }
 
+           
            
