@@ -5,9 +5,9 @@ import java.util.*;
 public class principal {
 public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Seleccione el tipo: 1)HashMap 2)TreeMap 3)LinkedHashMap");
+        System.out.println("Seleccione el tipo: \n1)HashMap \n2)TreeMap \n3)LinkedHashMap");
         String tipomapa = scanner.nextLine();
-        CartaMap mapaCarta = CartaMap(tipomapa);
+        CartaMap mapaCarta = CartaMapFactory(tipomapa);
         leerArchivo(mapaCarta);
         
         while (true) {
@@ -65,6 +65,7 @@ public static void main(String[] args) {
                 }
             }
             if (option == 5){
+                long start = System.nanoTime();    
                 Map<String, String> allCards = mapaCarta.getCartas();
                 if (allCards.isEmpty()) {
                     System.out.println("No hay cartas disponibles.");
@@ -76,8 +77,11 @@ public static void main(String[] args) {
                         System.out.println(nombreEntrada + " " + tipoEntrada + " ");
                     }
                 }
+                long elapsedTime = System.nanoTime() - start;
+                System.out.println("Tiempo tomado: "+elapsedTime+" nano segundos");
             }
             if (option == 6){
+                long start = System.nanoTime(); 
                 Map<String, String> allCardsByType = mapaCarta.getTCartasTipo();
                 if (allCardsByType.isEmpty()) {
                     System.out.println("No hay cartas disponibles.");
@@ -89,6 +93,11 @@ public static void main(String[] args) {
                         System.out.println(tipoEntrada + ": " + nombreEntrada);
                     }
                 }
+                long elapsedTime = System.nanoTime() - start;
+                System.out.println("Tiempo tomado: "+elapsedTime+" nano segundos");
+            }
+            if (option == 0){
+                break;
             }
         }
     }
@@ -109,7 +118,7 @@ public static void main(String[] args) {
             System.exit(1);
         }
     }
-    public static CartaMap CartaMap(String mapType) {
+    public static CartaMap CartaMapFactory(String mapType) {
         switch (mapType) {
             case "1":return new HashMapCards();
             case "2":return new TreeMapCards();
@@ -118,6 +127,3 @@ public static void main(String[] args) {
         }
     }
 }
-
-           
-           
